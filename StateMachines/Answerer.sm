@@ -1,0 +1,15 @@
+%header Answerer.h
+
+%class Answerer
+%start AnswererSM::Idle
+
+%map AnswererSM
+%%
+Idle
+{
+}
+
+Working
+{
+}
+%%

@@ -1,0 +1,15 @@
+%header Asker.h
+
+%class Asker
+%start AskerSM::Idle
+
+%map AskerSM
+%%
+Idle
+{
+}
+
+Working
+{
+}
+%%

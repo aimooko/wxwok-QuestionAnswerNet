@@ -1,0 +1,15 @@
+%header Server.h
+
+%class Server
+%start ServerSM::Idle
+
+%map ServerSM
+%%
+Idle
+{
+}
+
+Working
+{
+}
+%%
