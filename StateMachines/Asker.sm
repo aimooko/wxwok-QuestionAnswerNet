@@ -1,3 +1,5 @@
+%package QAS 
+
 %header Asker.h
 
 %class Asker

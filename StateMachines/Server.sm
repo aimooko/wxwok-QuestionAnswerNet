@@ -1,3 +1,5 @@
+%package QAS 
+
 %header Server.h
 
 %class Server

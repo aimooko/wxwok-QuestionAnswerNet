@@ -1,0 +1,18 @@
+%package QAS 
+%header Test.h
+
+%include Asker.h
+
+%class Test
+%start TestSM::Idle
+
+%map TestSM
+%%
+Idle
+{
+}
+
+Working
+{
+}
+%%

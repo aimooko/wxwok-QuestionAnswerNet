@@ -6,7 +6,7 @@
  */
 
 #include "Answerer.h"
-
+namespace QAS {
 Answerer::Answerer() {
 	// TODO Auto-generated constructor stub
 
@@ -15,4 +15,4 @@ Answerer::Answerer() {
 Answerer::~Answerer() {
 	// TODO Auto-generated destructor stub
 }
-
+}

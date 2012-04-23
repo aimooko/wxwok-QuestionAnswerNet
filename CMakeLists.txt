@@ -16,7 +16,7 @@ set(LIBPURPLE_DIR /home/xuewen/Develop/pidgin-2.10.2/build)
 include_directories(${LIBPURPLE_DIR}/include/libpurple)
 
 #SET(CMAKE_VERBOSE_MAKEFILE ON)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR} test)
 
 # Find path of smc compriler
 file(GLOB smc_path /opt/smc*)
@@ -39,8 +39,8 @@ function(smc sm_file)
 
     #message(STATUS "Add state compiler for: ${fpath}/${fname}_sm.cpp  ${fpath}/${fname}_sm.h")
 	add_custom_command(
-		OUTPUT ${fpath}/${fname}_sm.cpp  ${fpath}/${fname}_sm.h
-		COMMAND java -jar ${smc_bin} -c++ ${sm_file}
+		OUTPUT ${fpath}/${fname}_sm.cpp  ${fpath}/${fname}_sm.h ${fpath}/${fname}_sm.dot
+		COMMAND java -jar ${smc_bin} -c++ -g ${sm_file} && java -jar ${smc_bin} -graph -g ${sm_file}
 		DEPENDS ${sm_file}
 	)
 	set(StateMachineSources ${StateMachineSources} ${fpath}/${fname}_sm.cpp  ${fpath}/${fname}_sm.h PARENT_SCOPE)
@@ -50,7 +50,11 @@ foreach(sfile ${StateMachineFiles})
 	smc(${sfile})
 endforeach(sfile)
 
-add_library(QuestionAnswer SHARED Main.cpp ${StateMachineSources})
+file(GLOB SOURCE_FILES "*.cpp" )
+file(GLOB TEST_SOURCE_FILES "test/*.cpp" )
+
+set(CMAKE_BUILD_TYPE Debug)
+add_library(QuestionAnswer SHARED ${SOURCE_FILES} ${TEST_SOURCE_FILES} ${StateMachineSources})
 
 
 install(TARGETS QuestionAnswer DESTINATION /home/xuewen/Develop/pidgin-2.10.2/build/lib/purple-2)

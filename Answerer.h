@@ -7,11 +7,11 @@
 
 #ifndef ANSWERER_H_
 #define ANSWERER_H_
-
+namespace QAS {
 class Answerer {
 public:
 	Answerer();
 	virtual ~Answerer();
 };
-
+}
 #endif /* ANSWERER_H_ */

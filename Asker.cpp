@@ -6,7 +6,7 @@
  */
 
 #include "Asker.h"
-
+namespace QAS {
 Asker::Asker() {
 	// TODO Auto-generated constructor stub
 
@@ -15,4 +15,4 @@ Asker::Asker() {
 Asker::~Asker() {
 	// TODO Auto-generated destructor stub
 }
-
+}

@@ -8,7 +8,7 @@
 #ifndef ASKER_H_
 #define ASKER_H_
 #include "StateMachines/Asker_sm.h"
-
+namespace QAS {
 class Asker {
 public:
 	Asker();
@@ -22,5 +22,5 @@ public:
 	virtual void creditsReceived() = 0;
 
 };
-
+}
 #endif /* ASKER_H_ */
