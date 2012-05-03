@@ -41,4 +41,6 @@ void testRegisterLoginHandler(PurplePlugin* plugin)
 	 purple_signal_connect(purple_accounts_get_handle(), "account-signed-off", plugin, PURPLE_CALLBACK(on_signOff), NULL);
 }
 
+// Test plugin preference example: pidgin-2.10.2/libpurple/plugins/autoaccept.c
+
 } /* namespace QAS */

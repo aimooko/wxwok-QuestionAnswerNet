@@ -1,16 +1,19 @@
 PROJECT(QuestionAnswer)
 cmake_minimum_required(VERSION 2.8)
 
-
 INCLUDE (CheckIncludeFiles)
 CHECK_INCLUDE_FILES (malloc.h HAVE_MALLOC_H)
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in ${CMAKE_CURRENT_BINARY_DIR}/config.h)
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 # GTK2
 find_package (PkgConfig REQUIRED)
 pkg_check_modules (GTK2 REQUIRED gtk+-2.0)
 include_directories (${GTK2_INCLUDE_DIRS})
 link_directories (${GTK2_LIBRARY_DIRS})
+
+# gettext
+find_package(Gettext REQUIRED)
 
 set(LIBPURPLE_DIR /home/xuewen/Develop/pidgin-2.10.2/build)
 include_directories(${LIBPURPLE_DIR}/include/libpurple)

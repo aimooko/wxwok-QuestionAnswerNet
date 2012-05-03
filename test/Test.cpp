@@ -11,10 +11,12 @@
 #include <version.h>
 #include <xmlnode.h>
 
+#include "Test.h"
 #include "TestPidginCommand.h"
 #include "TestPidginAction.h"
 #include "TestPidginSignal.h"
 #include "TestAccountClient.h"
+#include "TestPidginPluginPreference.h"
 /* This will prevent compiler errors in some instances and is better explained in the
  * how-to documents on the wiki */
 #ifndef G_GNUC_NULL_TERMINATED
@@ -26,8 +28,6 @@
 #endif
 
 namespace QAS {
-
-#define PLUGIN_ID "question_answer_client"
 
 /* we're adding this here and assigning it in plugin_load because we need
  * a valid plugin handle for our call to purple_notify_message() in the
@@ -91,7 +91,7 @@ PurplePluginInfo g_testPluginInfo = {
 
 	NULL,
 	NULL,
-	NULL,
+	&prefs_info,
 	plugin_actions,		/* this tells libpurple the address of the function to call
 				   to get the list of plugin actions. */
 	NULL,

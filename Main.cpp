@@ -28,10 +28,12 @@
 #define PURPLE_PLUGINS
 #include <plugin.h>
 #include "Test.h"
+#include "TestPidginPluginPreference.h"
 using namespace QAS;
 static void
 init_plugin (PurplePlugin * plugin)
 {
+	init_test_plugin(plugin);
 }
 extern "C" {
 PURPLE_INIT_PLUGIN (hello_world, init_plugin, g_testPluginInfo)
