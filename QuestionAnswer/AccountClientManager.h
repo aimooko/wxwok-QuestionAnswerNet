@@ -8,6 +8,8 @@
 #ifndef ACCOUNTMANAGER_H_
 #define ACCOUNTMANAGER_H_
 #include "AccountClient.h"
+
+#include "account.h"
 namespace QAS {
 
 class AccountClientManager {
@@ -15,9 +17,10 @@ public:
 	AccountClientManager* instance();
 	void addClient(AccountClient*);
 	void removeClient(AccountClient*);
-private:
 	AccountClientManager();
+	static AccountClient* createAccount(PurpleAccount *account);
 	virtual ~AccountClientManager();
+
 };
 }
 #endif /* ACCOUNTMANAGER_H_ */

@@ -8,11 +8,11 @@
 #include "AccountClientManager.h"
 namespace QAS {
 AccountClientManager::AccountClientManager() {
-	// TODO Auto-generated constructor stub
+}
 
+AccountClient* AccountClientManager::createAccount() {
 }
 
 AccountClientManager::~AccountClientManager() {
-	// TODO Auto-generated destructor stub
 }
 }
