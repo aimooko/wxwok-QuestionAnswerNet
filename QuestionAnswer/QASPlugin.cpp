@@ -81,7 +81,7 @@ gboolean QASPlugin::plugin_unload(PurplePlugin *plugin)
 void QASPlugin::accountSignonHandler(PurpleAccount *account)
 {
 	purple_debug_info("QASPlugin", "On account login");
-	if (AccountClient* account = AccountClientManager::createAccount(account)) {
+	if (account) {
 		m_accoutManager.addClient(account);
 		purple_debug_info("QASPlugin", "account added in to manager");
 	}
@@ -90,7 +90,7 @@ void QASPlugin::accountSignonHandler(PurpleAccount *account)
 void QASPlugin::accountSignoffHandler(PurpleAccount *account)
 {
 	purple_debug_info("QASPlugin", "On account logout");
-	if (m_accoutManager.search(account)) {
+	if (account) {
 		m_accoutManager.removeClient(account);
 		purple_debug_info("QASPlugin", "account removed");
 	}

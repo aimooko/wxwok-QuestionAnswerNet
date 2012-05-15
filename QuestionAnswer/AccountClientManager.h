@@ -9,17 +9,26 @@
 #define ACCOUNTMANAGER_H_
 #include "AccountClient.h"
 
+#include <boost/shared_ptr.hpp>
+#include <map>
+#include <string>
+using namespace std;
+using namespace boost;
+
 #include "account.h"
 namespace QAS {
 
 class AccountClientManager {
 public:
-	AccountClientManager* instance();
+	typedef map<string, shared_ptr<AccountClient> > AccountMap;
 	void addClient(AccountClient*);
+	void addClient(PurpleAccount*);
 	void removeClient(AccountClient*);
+	void removeClient(PurpleAccount*);
 	AccountClientManager();
-	static AccountClient* createAccount(PurpleAccount *account);
 	virtual ~AccountClientManager();
+private:
+	AccountMap m_accounts;
 
 };
 }

@@ -10,9 +10,19 @@ namespace QAS {
 AccountClientManager::AccountClientManager() {
 }
 
-AccountClient* AccountClientManager::createAccount() {
+void AccountClientManager::addClient(AccountClient* account) {
+}
+
+void AccountClientManager::addClient(PurpleAccount* account) {
+}
+
+void AccountClientManager::removeClient(AccountClient* account) {
+}
+
+void AccountClientManager::removeClient(PurpleAccount* account) {
 }
 
 AccountClientManager::~AccountClientManager() {
 }
 }
+
