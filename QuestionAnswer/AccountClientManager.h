@@ -21,10 +21,12 @@ namespace QAS {
 class AccountClientManager {
 public:
 	typedef map<string, shared_ptr<AccountClient> > AccountMap;
-	void addClient(AccountClient*);
-	void addClient(PurpleAccount*);
-	void removeClient(AccountClient*);
-	void removeClient(PurpleAccount*);
+	void addClient(shared_ptr<AccountClient> account);
+	shared_ptr<AccountClient> addClient(PurpleAccount*);
+	shared_ptr<AccountClient> addClient(PurpleAccount* account, AccountClient::AccountType type);
+	shared_ptr<AccountClient> getClient(PurpleAccount *account);
+	bool removeClient(shared_ptr<AccountClient> account);
+	bool removeClient(PurpleAccount*);
 	AccountClientManager();
 	virtual ~AccountClientManager();
 private:

@@ -18,20 +18,27 @@
 
 #ifndef ASKER_H_
 #define ASKER_H_
-#include "StateMachines/Asker_sm.h"
+#include "Asker.h"
+#include <boost/shared_ptr.hpp>
+#include "Asker_sm.h"
+#include "AccountClient.h"
+
 namespace QAS {
-class Asker {
+
+class Asker : public AccountClient {
 public:
 	Asker();
 	virtual ~Asker();
 
-	virtual void ask() = 0;
-	virtual void answerReceived() = 0;
-	virtual void replyAnswerRight(bool) = 0;
+	virtual void ask() {}
+	virtual void answerReceived() {}
+	virtual void replyAnswerRight(bool) {}
 
-	virtual void getCredits() = 0;
-	virtual void creditsReceived() = 0;
+	virtual void getCredits() {}
+	virtual void creditsReceived() {}
 
+private:
+	AskerContext m_stateContext;
 };
 }
 #endif /* ASKER_H_ */

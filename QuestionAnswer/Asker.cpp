@@ -6,9 +6,16 @@
  */
 
 #include "Asker.h"
+#include <boost/shared_ptr.hpp>
+
+#include "Asker_sm.h"
+
 namespace QAS {
-Asker::Asker() {
+Asker::Asker() :
+    m_stateContext(*this)
+	{
 	// TODO Auto-generated constructor stub
+	m_type = AccountClient::AskerType;
 
 }
 

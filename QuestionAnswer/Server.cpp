@@ -6,9 +6,13 @@
  */
 
 #include "Server.h"
+#include "AccountClient.h"
 namespace QAS {
-Server::Server() {
+Server::Server() :
+	m_stateContext(*this)
+{
 	// TODO Auto-generated constructor stub
+	m_type = AccountClient::ServerType;
 
 }
 

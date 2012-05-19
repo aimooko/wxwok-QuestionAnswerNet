@@ -6,16 +6,22 @@
  */
 
 #include "AccountClient.h"
-
 namespace QAS {
 
-AccountClient::AccountClient() {
-	// TODO Auto-generated constructor stub
+AccountClient::AccountClient() :
+	m_purpleAccount(0)
+	, m_type(AccountClient::OtherType)
 
+{
+}
+
+AccountClient::AccountClient(PurpleAccount* account, AccountType type) :
+	m_purpleAccount(account)
+	, m_type(type)
+{
 }
 
 AccountClient::~AccountClient() {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace QAS */

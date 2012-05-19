@@ -8,12 +8,12 @@
 #ifndef PLUGINPREFERENCES_H_
 #define PLUGINPREFERENCES_H_
 #include <string>
-#include <vector>
+#include <set>
 #include "plugin.h"
 #include "pluginpref.h"
+#include "AccountClient.h"
 
-using std::string;
-using std::vector;
+using namespace std;
 
 namespace QAS {
 
@@ -28,13 +28,17 @@ public:
 	static void preferenceChanged(const char *name, PurplePrefType type,
 			const void* val, void* data);
 
-	vector<string>& getAnswerers();
-	void setAnswerers(const vector<string>& answerers);
-	vector<string>& getAskers();
-	void setAskers(const vector<string>& askers);
-	vector<string>& getServers();
-	void setServers(const vector<string>& servers);
+	set<string>& getAnswerers();
+	void setAnswerers(const set<string>& answerers);
+	bool isAnswerer(const string& name);
+	set<string>& getAskers();
+	void setAskers(const set<string>& askers);
+	bool isAsker(const string& name);
+	set<string>& getServers();
+	void setServers(const set<string>& servers);
+	bool isServer(const string& name);
 
+	AccountClient::AccountType clientType(const string& name);
 
 private:
 	static const string s_askersPrefName;
@@ -46,9 +50,9 @@ private:
 	static const string s_keyNameAnswers;
 	static const string s_keyNameServers;
 
-	vector<string> m_askers;
-	vector<string> m_answerers;
-	vector<string> m_servers;
+	set<string> m_askers;
+	set<string> m_answerers;
+	set<string> m_servers;
 };
 
 } /* namespace QAS */
