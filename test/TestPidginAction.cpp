@@ -13,6 +13,7 @@
 #include <xmlnode.h>
 
 #include "TestPidginAction.h"
+#include "TestPidginBuddyList.h"
 
 namespace QAS {
 /* This function is the callback for the plugin action we added. All we're
@@ -63,6 +64,12 @@ notify_uri_cb(PurplePluginAction *action)
 {
     /* This one should open your web browser of choice. */
     purple_notify_uri(question_and_answer_plugin, "http://www.pidgin.im/");
+}
+
+static void
+notify_test_buddy_cb(PurplePluginAction *action)
+{
+	TestPidginBuddyList::testBuddy();
 }
 
 const char* msg =
@@ -145,6 +152,9 @@ plugin_actions (PurplePlugin * plugin, gpointer context)
 
     list = g_list_prepend(list,
         purple_plugin_action_new("Show URI Notification", notify_uri_cb));
+
+    list = g_list_prepend(list,
+        purple_plugin_action_new("Test Buddy", notify_test_buddy_cb));
 
     list = g_list_prepend(list, purple_plugin_action_new("Test Send IQ to test", notify_test_jabber_send_cb));
 

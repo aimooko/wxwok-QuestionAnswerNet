@@ -19,6 +19,8 @@ namespace QAS {
 
 class PluginPreferences {
 public:
+	typedef set<string> PrefNameSet;
+
 	PluginPreferences();
 	virtual ~PluginPreferences();
 
@@ -28,14 +30,14 @@ public:
 	static void preferenceChanged(const char *name, PurplePrefType type,
 			const void* val, void* data);
 
-	set<string>& getAnswerers();
-	void setAnswerers(const set<string>& answerers);
+	PrefNameSet& getAnswerers();
+	void setAnswerers(const PrefNameSet& answerers);
 	bool isAnswerer(const string& name);
-	set<string>& getAskers();
-	void setAskers(const set<string>& askers);
+	PrefNameSet& getAskers();
+	void setAskers(const PrefNameSet& askers);
 	bool isAsker(const string& name);
-	set<string>& getServers();
-	void setServers(const set<string>& servers);
+	PrefNameSet& getServers();
+	void setServers(const PrefNameSet& servers);
 	bool isServer(const string& name);
 
 	AccountClient::AccountType clientType(const string& name);
@@ -50,9 +52,9 @@ private:
 	static const string s_keyNameAnswers;
 	static const string s_keyNameServers;
 
-	set<string> m_askers;
-	set<string> m_answerers;
-	set<string> m_servers;
+	PrefNameSet m_askers;
+	PrefNameSet m_answerers;
+	PrefNameSet m_servers;
 };
 
 } /* namespace QAS */

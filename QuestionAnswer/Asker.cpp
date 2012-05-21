@@ -22,4 +22,16 @@ Asker::Asker() :
 Asker::~Asker() {
 	// TODO Auto-generated destructor stub
 }
+
+/*
+ * workaround: ask the first non-blocked and available buddy
+ */
+void Asker::ask(const std::string& picturePath) {
+
+}
+void Asker::getBestAnswerer()
+{
+//GSList *purple_find_buddies(PurpleAccount *account, const char *name);
+
+}
 }

@@ -8,12 +8,15 @@
 #ifndef ACCOUNT_H_
 #define ACCOUNT_H_
 
-#include <boost/shared_ptr.hpp>
 
 #include "account.h"
+#include <boost/shared_ptr.hpp>
+#include <string>
 
 namespace QAS {
-
+class Asker;
+class Answerer;
+class Server;
 class AccountClient {
 public:
 	enum AccountType {AskerType, AnswererType, ServerType, OtherType};
@@ -24,8 +27,8 @@ public:
 	void onLogin();
 	void onLogout();
 
-	virtual void onMessage() {}
-	void sendMessage() {}
+	void onMessage();
+	void sendMessage();
 
 	AccountType getType() const {
 		return m_type;
@@ -42,6 +45,14 @@ public:
 	void setPurpleAccount(PurpleAccount* purpleAccount) {
 		m_purpleAccount = purpleAccount;
 	}
+
+	bool isAsker() const { return m_type == AskerType; }
+	boost::shared_ptr<Asker> toAsker();
+	bool isAnswerer() const { return m_type == AnswererType; }
+	boost::shared_ptr<Answerer> toAnswerer();
+	bool isServer() const { return m_type == ServerType; }
+	boost::shared_ptr<Server> toServer();
+	bool isOther() const { return m_type == OtherType; }
 protected:
 	PurpleAccount* m_purpleAccount;
 	AccountType m_type;

@@ -38,23 +38,23 @@ PluginPreferences::PluginPreferences() {
 PluginPreferences::~PluginPreferences() {
 }
 
-set<string>& PluginPreferences::getAnswerers() {
+PluginPreferences::PrefNameSet& PluginPreferences::getAnswerers() {
 	return m_answerers;
 }
 
-void PluginPreferences::setAnswerers(const set<string>& answerers) {
+void PluginPreferences::setAnswerers(const PrefNameSet& answerers) {
 	m_answerers = answerers;
 }
 
-set<string>& PluginPreferences::getAskers() {
+PluginPreferences::PrefNameSet& PluginPreferences::getAskers() {
 	return m_askers;
 }
 
-void PluginPreferences::setAskers(const set<string>& askers) {
+void PluginPreferences::setAskers(const PrefNameSet& askers) {
 	m_askers = askers;
 }
 
-set<string>& PluginPreferences::getServers() {
+PluginPreferences::PrefNameSet& PluginPreferences::getServers() {
 	return m_servers;
 }
 
@@ -77,10 +77,10 @@ bool PluginPreferences::isAnswerer(const string& name) {
 }
 
 bool PluginPreferences::isAsker(const string& name) {
-	return m_askers.find(name) != m_answerers.end();
+	return m_askers.find(name) != m_askers.end();
 }
 
-void PluginPreferences::setServers(const set<string>& servers) {
+void PluginPreferences::setServers(const PrefNameSet& servers) {
 	m_servers = servers;
 }
 
@@ -117,7 +117,7 @@ PurplePluginPrefFrame* PluginPreferences::createPurplePrefFrame(
 }
 
 bool PluginPreferences::isServer(const string& name) {
-	return m_servers.find(name) != m_answerers.end();
+	return m_servers.find(name) != m_servers.end();
 }
 
 AccountClient::AccountType PluginPreferences::clientType(const string& name) {

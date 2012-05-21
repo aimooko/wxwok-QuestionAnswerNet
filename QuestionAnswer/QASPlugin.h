@@ -16,6 +16,7 @@ using namespace std;
 #include "glib.h"
 #include "plugin.h"
 #include "account.h"
+#include "cmds.h"
 
 #include "PluginPreferences.h"
 namespace QAS {
@@ -34,12 +35,17 @@ private:
 	static QASPlugin* instance(PurplePlugin* plugin);
 	static gboolean plugin_load(PurplePlugin * plugin);
 	static gboolean plugin_unload(PurplePlugin *plugin);
+	static void pluginLoadHandler(PurplePlugin *plugin);
+	static void pluginUnloadHandler(PurplePlugin *plugin);
 	static void accountSignonHandler(PurpleAccount *account);
 	static void accountSignoffHandler(PurpleAccount *account);
+	static PurpleCmdRet  onAskCommand(PurpleConversation *, const gchar *cmd,
+            gchar **args, gchar **error, void *data);
 
 	PurplePlugin* m_plugin;
 	AccountClientManager m_accoutManager;
 	PluginPreferences m_preference;
+	PurpleCmdId m_qas_askCmdId;
 };
 } /* namespace QAS */
 #endif /* PIDGINPLUGIN_H_ */

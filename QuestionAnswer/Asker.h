@@ -30,12 +30,14 @@ public:
 	Asker();
 	virtual ~Asker();
 
-	virtual void ask() {}
+	void ask(const std::string& picturePath);
 	virtual void answerReceived() {}
 	virtual void replyAnswerRight(bool) {}
 
 	virtual void getCredits() {}
 	virtual void creditsReceived() {}
+
+	void getBestAnswerer();
 
 private:
 	AskerContext m_stateContext;

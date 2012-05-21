@@ -66,7 +66,6 @@ shared_ptr<AccountClient> AccountClientManager::getClient(
 
 shared_ptr<AccountClient> AccountClientManager::addClient(
 		PurpleAccount* account, AccountClient::AccountType type) {
-	assert(type != AccountClient::OtherType);
 	shared_ptr<AccountClient> ac;
 	switch (type) {
 	case AccountClient::AskerType:
@@ -79,6 +78,7 @@ shared_ptr<AccountClient> AccountClientManager::addClient(
 		ac.reset(new Server());
 		break;
 	case AccountClient::OtherType:
+		ac.reset();
 		break;
 	}
 
@@ -91,6 +91,18 @@ shared_ptr<AccountClient> AccountClientManager::addClient(
 }
 
 AccountClientManager::~AccountClientManager() {
+}
+
+// TODO: algorithm
+shared_ptr<Asker> AccountClientManager::getBestAsker() {
+	AccountMap::iterator it = m_accounts.begin();
+	while (it != m_accounts.end()) {
+		shared_ptr<AccountClient> ac = it->second;
+		if (ac && ac->isAsker())
+			return ac->toAsker();
+		it++;
+	}
+	return shared_ptr<Asker>();
 }
 }
 
