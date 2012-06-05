@@ -1,0 +1,1 @@
+/home/xuewen/Ubuntu One/lib/cmake/toolchain-mingw32.cmake

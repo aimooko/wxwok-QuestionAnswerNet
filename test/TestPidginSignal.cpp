@@ -889,7 +889,11 @@ gboolean test_signals_load(PurplePlugin *plugin)
 		                      PURPLE_CALLBACK(jabber_message_received), NULL);
 		purple_signal_connect(jabber_handle, "jabber-receiving-presence", plugin,
 		                      PURPLE_CALLBACK(jabber_presence_received), NULL);
-
+/*
+  <iq to='test@localhost/QAS' type='get' id="asdfsasdfds">
+      <bogus_node xmlns='super-duper-namespace' />
+  </iq>
+*/
 		/* IQ namespace signals */
 		purple_signal_emit(jabber_handle, "jabber-register-namespace-watcher",
 		                   "bogus_node", "super-duper-namespace");

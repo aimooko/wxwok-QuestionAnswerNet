@@ -15,6 +15,8 @@
 #include "TestPidginAction.h"
 #include "TestPidginBuddyList.h"
 
+#include "TestPidginFile.h"
+#include "TestPidginIm.h"
 namespace QAS {
 /* This function is the callback for the plugin action we added. All we're
  * doing here is displaying a message. When the user selects the plugin
@@ -72,47 +74,55 @@ notify_test_buddy_cb(PurplePluginAction *action)
 	TestPidginBuddyList::testBuddy();
 }
 
-const char* msg =
-		"<message type='chat'"
-		" to='test@localhost'>"
-		"<active xmlns='http://jabber.org/protocol/chatstates'/>"
-		"<body>test</body>"
-		"</message>";
+
+static void
+notify_test_file_cb(PurplePluginAction *action)
+{
+	TestPidginFile::run();
+}
+
+static const char* msg =
+               "<message type='chat'"
+               " to='xuewen@localhost'>"
+               "<active xmlns='http://jabber.org/protocol/chatstates'/>"
+               "<body>test</body>"
+               "</message>";
+
 static void
 notify_test_jabber_send_cb(PurplePluginAction *action)
 {
-	xmlnode* message;
-	xmlnode* body;
-	message = xmlnode_new("message");
- 	xmlnode_set_attrib(message, "from", "xuewen@localhost/develop");
- 	xmlnode_set_attrib(message, "to", "test@localhost");
- 	xmlnode_set_attrib(message, "type", "chat");
+       xmlnode* message;
+       xmlnode* body;
+       message = xmlnode_new("message");
+       xmlnode_set_attrib(message, "from", "xuewen@localhost/develop");
+       xmlnode_set_attrib(message, "to", "test@localhost");
+       xmlnode_set_attrib(message, "type", "chat");
 
- 	body = xmlnode_new_child(message, "body");
- 	const char* body_data = "this is a test stanza";
- 	body->data = (char*)body_data;
- 	body->data_sz = strlen(body_data);
+       body = xmlnode_new_child(message, "body");
+       const char* body_data = "this is a test stanza";
+       body->data = (char*)body_data;
+       body->data_sz = strlen(body_data);
 
- 	// get a connection and emit it
- 	GList* connections = purple_connections_get_all();
- 	GList* connection = g_list_first(connections);
-	PurpleConnection * gc_xuewen = 0;
- 	while(connection) {
- 		PurpleConnection * gc = (PurpleConnection*) connection->data;
- 		if (strcmp(gc->display_name, "xuewen@localhost/develop") == 0)
- 			gc_xuewen = gc;
- 		connection = g_list_next(connection);
- 	}
+       // get a connection and emit it
+       GList* connections = purple_connections_get_all();
+       GList* connection = g_list_first(connections);
+       PurpleConnection * gc_xuewen = 0;
+       while(connection) {
+               PurpleConnection * gc = (PurpleConnection*) connection->data;
+               if (strcmp(gc->display_name, "test@localhost/QAS") == 0)
+                       gc_xuewen = gc;
+               connection = g_list_next(connection);
+       }
 /*
- 	const gchar* id = purple_plugin_get_id(gc_xuewen->prpl);
- 	if (strcmp(id, prpl-jabber) == 0) {
+       const gchar* id = purple_plugin_get_id(gc_xuewen->prpl);
+       if (strcmp(id, prpl-jabber) == 0) {
 
- 	}
+       }
 */
- 	PurplePlugin* plugin = purple_connection_get_prpl(gc_xuewen);
- 	PurplePluginProtocolInfo* info = PURPLE_PLUGIN_PROTOCOL_INFO(plugin);
- 	info->send_raw(gc_xuewen, msg, strlen(msg));
- 	//serv_send_im(gc_xuewen, "test@localhost", "this is a test", PURPLE_MESSAGE_SEND);
+       PurplePlugin* plugin = purple_connection_get_prpl(gc_xuewen);
+       PurplePluginProtocolInfo* info = PURPLE_PLUGIN_PROTOCOL_INFO(plugin);
+       info->send_raw(gc_xuewen, msg, strlen(msg));
+       //serv_send_im(gc_xuewen, "test@localhost", "this is a test", PURPLE_MESSAGE_SEND);
 }
 
 /* we tell libpurple in the PurplePluginInfo struct to call this function to
@@ -156,7 +166,13 @@ plugin_actions (PurplePlugin * plugin, gpointer context)
     list = g_list_prepend(list,
         purple_plugin_action_new("Test Buddy", notify_test_buddy_cb));
 
-    list = g_list_prepend(list, purple_plugin_action_new("Test Send IQ to test", notify_test_jabber_send_cb));
+    list = g_list_prepend(list,
+    		purple_plugin_action_new("Test file", notify_test_file_cb));
+
+    list = g_list_prepend(list,
+    		purple_plugin_action_new("Test jabber Send", notify_test_jabber_send_cb));
+
+    list = TestPidginIm::initTest(plugin, context, list);
 
     /* Once the list is complete, we send it to libpurple. */
 	return g_list_reverse(list);

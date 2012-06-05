@@ -9,7 +9,7 @@
 #define TEST_H_
 #include <plugin.h>
 namespace QAS {
-#define PLUGIN_ID "question_answer_client"
+#define PLUGIN_ID "QASTestPlugin"
 extern PurplePluginInfo g_testPluginInfo;
 } // namespace QAS
 #endif /* TEST_H_ */

@@ -41,6 +41,9 @@ private:
 	static void accountSignoffHandler(PurpleAccount *account);
 	static PurpleCmdRet  onAskCommand(PurpleConversation *, const gchar *cmd,
             gchar **args, gchar **error, void *data);
+	static GList * actionCallback(PurplePlugin * plugin, gpointer context);
+	static void onTest(PurplePluginAction *action);
+
 
 	PurplePlugin* m_plugin;
 	AccountClientManager m_accoutManager;

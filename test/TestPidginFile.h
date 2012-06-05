@@ -14,6 +14,7 @@ class TestPidginFile {
 public:
 	TestPidginFile();
 	virtual ~TestPidginFile();
+	static void run();
 };
 
 } /* namespace QAS */

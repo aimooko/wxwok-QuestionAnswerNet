@@ -37,12 +37,9 @@ PurplePlugin *question_and_answer_plugin = NULL;
 gboolean
 plugin_load (PurplePlugin * plugin)
 {
-	purple_notify_message (plugin, PURPLE_NOTIFY_MSG_INFO, "Questions & Answers!",
-		"This is Questions & Answers! plugin :)", NULL, NULL,
-		NULL);
 	question_and_answer_plugin = plugin; /* assign this here so we have a valid handle later */
 	register_commands(question_and_answer_plugin);
-	//test_signals_load(plugin);
+	test_signals_load(plugin);
 	testRegisterLoginHandler(plugin);
 	return TRUE;
 }
