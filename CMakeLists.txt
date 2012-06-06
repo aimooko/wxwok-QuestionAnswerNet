@@ -1,18 +1,5 @@
 PROJECT(QuestionAnswer)
 cmake_minimum_required(VERSION 2.8)
-if(WIN32)
-    Message(FATAL_ERROR "YES ${WIN32}")
-else(WIN32)
-    Message(FATAL_ERROR "NO ${WIN32}")
-endif(WIN32)
-
-if(UNIX)
-    include(CMakeListsOptionsWindows.cmake)
-else(UNIX)
-    include(CMakeListOptionsLinux.cmake)
-endif(UNIX)
-
-Message(FATAL_ERROR "Test include makefile")
 
 # Find path of smc compriler
 file(GLOB smc_path /opt/smc*)
